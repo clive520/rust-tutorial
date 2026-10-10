@@ -72,7 +72,9 @@ fn main() {
 
 嘗試修改下方的代碼，測試不同數字的比較結果：
 
-<RustRunner initial-code='use std::cmp::Ordering;
+<RustRunner>
+```rust
+use std::cmp::Ordering;
 
 fn main() {
     let secret = 50;
@@ -86,4 +88,6 @@ fn main() {
         Ordering::Greater => println!("👉 太大了！"),
         Ordering::Equal => println!("🎉 恭喜！精準猜中！"),
     }
-}' />
+}
+```
+</RustRunner>

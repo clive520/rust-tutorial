@@ -50,7 +50,9 @@ Pick three.";
 
 ## 3. 在線動手玩：迷你搜尋引擎
 
-<RustRunner initial-code='fn search<&#39;a>(query: &str, contents: &amp;&#39;a str) -> Vec<&amp;&#39;a str> {
+<RustRunner>
+```rust
+fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents
         .lines()
         .filter(|line| line.contains(query))
@@ -72,4 +74,6 @@ Rust has zero-cost abstractions.
     for (idx, line) in results.iter().enumerate() {
         println!("[第 {} 筆比對] {}", idx + 1, line.trim());
     }
-}' />
+}
+```
+</RustRunner>

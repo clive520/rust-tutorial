@@ -72,7 +72,11 @@ fn main() {
 
 你可以直接修改下方文字框中的字串，點擊 **「▶ 立即執行」**，不用裝環境也能看到實際執行輸出：
 
-<RustRunner initial-code='fn main() {
+<RustRunner>
+```rust
+fn main() {
     let name = "同學";
     println!("哈囉，{}！歡迎來到 Rust 程式設計課程！🦀", name);
-}' />
+}
+```
+</RustRunner>

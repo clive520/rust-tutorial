@@ -48,7 +48,9 @@ impl Summary for Article {
 
 ## 3. 在線動手玩：自訂 Trait 實作
 
-<RustRunner initial-code='trait Greeter {
+<RustRunner>
+```rust
+trait Greeter {
     fn greet(&self) -> String;
 }
 
@@ -82,4 +84,6 @@ fn main() {
 
     print_greeting(&person);
     print_greeting(&bot);
-}' />
+}
+```
+</RustRunner>

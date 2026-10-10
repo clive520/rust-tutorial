@@ -8,6 +8,11 @@
       </button>
     </div>
 
+    <!-- 隱藏插槽容器以擷取 slot 內容 -->
+    <div ref="slotContainer" style="display: none;">
+      <slot></slot>
+    </div>
+
     <div class="editor-wrap">
       <textarea
         v-model="code"
@@ -25,16 +30,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const props = defineProps({
   initialCode: {
     type: String,
-    default: 'fn main() {\n    println!("Hello, Rust World!");\n}'
+    default: ''
   }
 })
 
-const code = ref(props.initialCode.trim())
+const slotContainer = ref(null)
+const code = ref(props.initialCode || 'fn main() {\n    println!("Hello, Rust World!");\n}')
+
+onMounted(() => {
+  if (slotContainer.value && slotContainer.value.innerText.trim()) {
+    code.value = slotContainer.value.innerText.trim()
+  }
+})
 const output = ref('')
 const error = ref('')
 const loading = ref(false)

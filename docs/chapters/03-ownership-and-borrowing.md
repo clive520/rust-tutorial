@@ -76,7 +76,9 @@ fn append_world(s: &mut String) {
 }
 ```
 
-<RustRunner initial-code='fn main() {
+<RustRunner>
+```rust
+fn main() {
     let mut greeting = String::from("Rust");
     
     // 借用 greeting 並傳入函式
@@ -87,4 +89,6 @@ fn append_world(s: &mut String) {
 
 fn add_exclamation(text: &mut String) {
     text.push_str(" is Awesome! 🦀");
-}' />
+}
+```
+</RustRunner>

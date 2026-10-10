@@ -49,7 +49,9 @@ println!("收到：{}", received);
 
 ## 4. 在線動手玩：多執行緒平行計算
 
-<RustRunner initial-code='use std::sync::mpsc;
+<RustRunner>
+```rust
+use std::sync::mpsc;
 use std::thread;
 
 fn main() {
@@ -69,4 +71,6 @@ fn main() {
     for received in rx {
         println!("主執行緒收到: {}", received);
     }
-}' />
+}
+```
+</RustRunner>

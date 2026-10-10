@@ -63,7 +63,9 @@ Rust 沒有像其他語言的 `null` 或 `nil`，而是使用 `Option<T>` 來明
 
 ## 4. 實戰動手玩：學生資料庫
 
-<RustRunner initial-code='use std::collections::HashMap;
+<RustRunner>
+```rust
+use std::collections::HashMap;
 
 #[derive(Debug)]
 struct Student {
@@ -86,4 +88,6 @@ fn main() {
     for (id, student) in &class_roster {
         println!("學號 {}: {} (分數: {})", id, student.name, student.score);
     }
-}' />
+}
+```
+</RustRunner>

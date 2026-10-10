@@ -52,7 +52,9 @@ pub struct ThreadPool {
 
 ## 4. 在線體驗：模擬 HTTP 回應生成
 
-<RustRunner initial-code='fn handle_request(path: &str) -> (u16, &str, &str) {
+<RustRunner>
+```rust
+fn handle_request(path: &str) -> (u16, &str, &str) {
     match path {
         "/" => (200, "OK", "<h1>歡迎來到 Rust 伺服器首頁！🦀</h1>"),
         "/about" => (200, "OK", "<p>這是以純 Rust 標準庫打造的伺服器。</p>"),
@@ -71,4 +73,6 @@ fn main() {
         println!("Content-Type: text/html; charset=utf-8\r\n");
         println!("{}", body);
     }
-}' />
+}
+```
+</RustRunner>
