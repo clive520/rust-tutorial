@@ -58,13 +58,13 @@ fn main() {
 
     println!("你猜的數字是: {}", guess);
 
-    // 進行比對
-    if guess < secret_number {
-        println!("太小了！");
-    } else if guess > secret_number {
-        println!("太大了！");
-    } else {
+    // 進行比對 (使用 cmp 方法比對)
+    if guess == secret_number {
         println!("🎉 恭喜你猜中了！");
+    } else if guess <= secret_number {
+        println!("太小了！");
+    } else {
+        println!("太大了！");
     }
 }
 ```
@@ -84,12 +84,12 @@ fn main() {
     println!("祕密數字: {}", secret);
     println!("玩家猜測: {}", guess);
 
-    if guess < secret {
-        println!("👉 太小了！");
-    } else if guess > secret {
-        println!("👉 太大了！");
-    } else {
+    if guess == secret {
         println!("🎉 恭喜！精準猜中！");
+    } else if guess <= secret {
+        println!("👉 太小了！");
+    } else {
+        println!("👉 太大了！");
     }
 }
 ```
