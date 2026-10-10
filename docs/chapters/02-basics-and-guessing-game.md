@@ -70,18 +70,4 @@ fn main() {
 
 嘗試修改下方的代碼，測試不同數字的比較結果：
 
-<RustRunner initial-code="use std::cmp::Ordering;
-
-fn main() {
-    let secret = 50;
-    let guess = 42;
-
-    println!(&quot;祕密數字: {}&quot;, secret);
-    println!(&quot;玩家猜測: {}&quot;, guess);
-
-    match guess.cmp(&amp;secret) {
-        Ordering::Less =&gt; println!(&quot;👉 太小了！&quot;),
-        Ordering::Greater =&gt; println!(&quot;👉 太大了！&quot;),
-        Ordering::Equal =&gt; println!(&quot;🎉 恭喜！精準猜中！&quot;),
-    }
-}" />
+<RustRunner></RustRunner>
