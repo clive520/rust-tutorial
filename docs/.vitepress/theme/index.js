@@ -6,6 +6,7 @@ import GuessingTerminal from '../../components/GuessingTerminal.vue'
 import TrafficSimulator from '../../components/TrafficSimulator.vue'
 import BorrowVisualizer from '../../components/BorrowVisualizer.vue'
 import DataModelLab from '../../components/DataModelLab.vue'
+import TraitPowerLab from '../../components/TraitPowerLab.vue'
 
 export default {
   extends: DefaultTheme,
@@ -17,5 +18,6 @@ export default {
     app.component('TrafficSimulator', TrafficSimulator)
     app.component('BorrowVisualizer', BorrowVisualizer)
     app.component('DataModelLab', DataModelLab)
+    app.component('TraitPowerLab', TraitPowerLab)
   }
 }
