@@ -8,6 +8,7 @@ import BorrowVisualizer from '../../components/BorrowVisualizer.vue'
 import DataModelLab from '../../components/DataModelLab.vue'
 import TraitPowerLab from '../../components/TraitPowerLab.vue'
 import MiniGrepSimulator from '../../components/MiniGrepSimulator.vue'
+import ConcurrencyPipelineLab from '../../components/ConcurrencyPipelineLab.vue'
 
 export default {
   extends: DefaultTheme,
@@ -21,5 +22,6 @@ export default {
     app.component('DataModelLab', DataModelLab)
     app.component('TraitPowerLab', TraitPowerLab)
     app.component('MiniGrepSimulator', MiniGrepSimulator)
+    app.component('ConcurrencyPipelineLab', ConcurrencyPipelineLab)
   }
 }
