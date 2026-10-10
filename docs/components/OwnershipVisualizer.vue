@@ -75,7 +75,7 @@
       </div>
       <div v-else-if="currentStep === 3">
         🛑 <strong>編譯器報錯 (E0382)：</strong>
-        <code>borrow of moved value: `s1`</code><br/>
+        <code>borrow of moved value: `s1`</code><br>
         Rust 在編譯時期就擋下這個錯誤，保證執行時期的絕對安全！
       </div>
     </div>
