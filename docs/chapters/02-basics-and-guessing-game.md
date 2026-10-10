@@ -36,7 +36,6 @@ use std::io;
 fn main() {
     println!("🎮 歡迎來到 Rust 猜數字遊戲！");
 
-    // 假設祕密數字為 42（實務上可透過 rand::thread_rng() 生成）
     let secret_number = 42;
 
     println!("請輸入你猜測的數字 (1~100)：");
@@ -47,7 +46,6 @@ fn main() {
         .read_line(&mut guess)
         .expect("讀取輸入失敗！");
 
-    // 遮蔽 (Shadowing) 與錯誤處理
     let guess: u32 = match guess.trim().parse() {
         Ok(num) => num,
         Err(_) => {
@@ -58,13 +56,10 @@ fn main() {
 
     println!("你猜的數字是: {}", guess);
 
-    // 進行比對 (使用 cmp 方法比對)
-    if guess == secret_number {
-        println!("🎉 恭喜你猜中了！");
-    } else if guess <= secret_number {
-        println!("太小了！");
-    } else {
-        println!("太大了！");
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("太小了！"),
+        Ordering::Greater => println!("太大了！"),
+        Ordering::Equal => println!("🎉 恭喜你猜中了！"),
     }
 }
 ```
@@ -75,22 +70,18 @@ fn main() {
 
 嘗試修改下方的代碼，測試不同數字的比較結果：
 
-<RustRunner>
-```rust
+<RustRunner initial-code="use std::cmp::Ordering;
+
 fn main() {
     let secret = 50;
-    let guess = 42; // 試著修改這個數值
+    let guess = 42;
 
-    println!("祕密數字: {}", secret);
-    println!("玩家猜測: {}", guess);
+    println!(&quot;祕密數字: {}&quot;, secret);
+    println!(&quot;玩家猜測: {}&quot;, guess);
 
-    if guess == secret {
-        println!("🎉 恭喜！精準猜中！");
-    } else if guess <= secret {
-        println!("👉 太小了！");
-    } else {
-        println!("👉 太大了！");
+    match guess.cmp(&amp;secret) {
+        Ordering::Less =&gt; println!(&quot;👉 太小了！&quot;),
+        Ordering::Greater =&gt; println!(&quot;👉 太大了！&quot;),
+        Ordering::Equal =&gt; println!(&quot;🎉 恭喜！精準猜中！&quot;),
     }
-}
-```
-</RustRunner>
+}" />
