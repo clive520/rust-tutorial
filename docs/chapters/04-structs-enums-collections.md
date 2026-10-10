@@ -46,8 +46,8 @@ enum Message {
 }
 ```
 
-### 最重要的 Enum：`Option<T>`
-Rust 沒有像其他語言的 `null` 或 `nil`，而是使用 `Option<T>` 來明確表示數值存在或不存在：
+### 最重要的 Enum：Option
+Rust 沒有像其他語言的 `null` 或 `nil`，而是使用 `Option` 來明確表示數值存在或不存在：
 - `Some(value)`
 - `None`
 
@@ -55,39 +55,12 @@ Rust 沒有像其他語言的 `null` 或 `nil`，而是使用 `Option<T>` 來明
 
 ## 3. 常見集合 (Collections)
 
-- **動態陣列** `Vec<T>`：在 Heap 上動態分配、連續儲存同型別的資料。
-- **字串** `String`：UTF-8 編碼的位元組集合。
-- **雜湊映射** `HashMap<K, V>`：鍵值對（Key-Value）儲存結構。
+- **動態陣列** (`Vec`)：在 Heap 上動態分配、連續儲存同型別的資料。
+- **字串** (`String`)：UTF-8 編碼的位元組集合。
+- **雜湊映射** (`HashMap`)：鍵值對（Key-Value）儲存結構。
 
 ---
 
 ## 4. 實戰動手玩：學生資料庫
 
-<RustRunner>
-```rust
-use std::collections::HashMap;
-
-#[derive(Debug)]
-struct Student {
-    name: String,
-    score: u32,
-}
-
-fn main() {
-    let mut class_roster = HashMap::new();
-
-    class_roster.insert("001", Student {
-        name: "小明".to_string(),
-        score: 95,
-    });
-    class_roster.insert("002", Student {
-        name: "小華".to_string(),
-        score: 88,
-    });
-
-    for (id, student) in &class_roster {
-        println!("學號 {}: {} (分數: {})", id, student.name, student.score);
-    }
-}
-```
-</RustRunner>
+<RustRunner></RustRunner>

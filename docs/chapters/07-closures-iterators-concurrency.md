@@ -49,28 +49,4 @@ println!("收到：{}", received);
 
 ## 4. 在線動手玩：多執行緒平行計算
 
-<RustRunner>
-```rust
-use std::sync::mpsc;
-use std::thread;
-
-fn main() {
-    let (tx, rx) = mpsc::channel();
-
-    // 啟動 3 個背景執行緒
-    for i in 1..=3 {
-        let thread_tx = tx.clone();
-        thread::spawn(move || {
-            let msg = format!("執行緒 #{} 完成工作！", i);
-            thread_tx.send(msg).unwrap();
-        });
-    }
-
-    drop(tx); // 關閉原本的發送端，以便接收端知道何時結束
-
-    for received in rx {
-        println!("主執行緒收到: {}", received);
-    }
-}
-```
-</RustRunner>
+<RustRunner></RustRunner>

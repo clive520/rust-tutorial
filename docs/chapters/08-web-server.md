@@ -52,27 +52,4 @@ pub struct ThreadPool {
 
 ## 4. 在線體驗：模擬 HTTP 回應生成
 
-<RustRunner>
-```rust
-fn handle_request(path: &str) -> (u16, &str, &str) {
-    match path {
-        "/" => (200, "OK", "<h1>歡迎來到 Rust 伺服器首頁！🦀</h1>"),
-        "/about" => (200, "OK", "<p>這是以純 Rust 標準庫打造的伺服器。</p>"),
-        _ => (404, "NOT FOUND", "<h1>404 找不到頁面</h1>"),
-    }
-}
-
-fn main() {
-    let test_paths = ["/", "/about", "/unknown"];
-
-    for path in test_paths {
-        let (status, phrase, body) = handle_request(path);
-        println!("--- 請求路徑: {} ---", path);
-        println!("HTTP/1.1 {} {}", status, phrase);
-        println!("Content-Length: {}", body.len());
-        println!("Content-Type: text/html; charset=utf-8\r\n");
-        println!("{}", body);
-    }
-}
-```
-</RustRunner>
+<RustRunner></RustRunner>

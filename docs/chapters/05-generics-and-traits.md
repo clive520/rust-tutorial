@@ -48,42 +48,4 @@ impl Summary for Article {
 
 ## 3. 在線動手玩：自訂 Trait 實作
 
-<RustRunner>
-```rust
-trait Greeter {
-    fn greet(&self) -> String;
-}
-
-struct Human {
-    name: String,
-}
-
-struct Robot {
-    model_id: u32,
-}
-
-impl Greeter for Human {
-    fn greet(&self) -> String {
-        format!("你好！我是人類 {}", self.name)
-    }
-}
-
-impl Greeter for Robot {
-    fn greet(&self) -> String {
-        format!("嗶嗶... 我是機器人型號 #{}", self.model_id)
-    }
-}
-
-fn print_greeting(item: &impl Greeter) {
-    println!("{}", item.greet());
-}
-
-fn main() {
-    let person = Human { name: "志賢".to_string() };
-    let bot = Robot { model_id: 2026 };
-
-    print_greeting(&person);
-    print_greeting(&bot);
-}
-```
-</RustRunner>
+<RustRunner></RustRunner>

@@ -50,30 +50,4 @@ Pick three.";
 
 ## 3. 在線動手玩：迷你搜尋引擎
 
-<RustRunner>
-```rust
-fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    contents
-        .lines()
-        .filter(|line| line.contains(query))
-        .collect()
-}
-
-fn main() {
-    let query = "Rust";
-    let document = "
-Python is popular.
-Rust gives you speed and memory safety.
-JavaScript powers the web.
-Rust has zero-cost abstractions.
-";
-
-    let results = search(query, document);
-    println!("🔍 搜尋關鍵字: \"{}\"", query);
-    println!("----------------------------");
-    for (idx, line) in results.iter().enumerate() {
-        println!("[第 {} 筆比對] {}", idx + 1, line.trim());
-    }
-}
-```
-</RustRunner>
+<RustRunner></RustRunner>
