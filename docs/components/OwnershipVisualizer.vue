@@ -22,10 +22,10 @@
       <div class="memory-zone stack-zone">
         <h5>棧 (Stack 記憶體)</h5>
         
-        <div class="memory-card" :class="{ invalidated: currentStep >= 2 }">
+        <div class="memory-card" :class="{ invalidated: currentStep > 1 }">
           <div class="card-title">
             變數: <code>s1</code>
-            <span v-if="currentStep >= 2" class="badge-danger">已失效 (Moved)</span>
+            <span v-if="currentStep > 1" class="badge-danger">已失效 (Moved)</span>
             <span v-else class="badge-success">有效</span>
           </div>
           <div class="card-body">
@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div v-if="currentStep >= 2" class="memory-card active-card">
+        <div v-if="currentStep > 1" class="memory-card active-card">
           <div class="card-title">
             變數: <code>s2</code>
             <span class="badge-success">獲得所有權</span>
@@ -60,7 +60,7 @@
           <div class="heap-index">[0] 實際字串資料</div>
           <div class="heap-content">"h" | "e" | "l" | "l" | "o"</div>
           <div class="heap-owner">
-            擁有者: <strong>{{ currentStep >= 2 ? 's2' : 's1' }}</strong>
+            擁有者: <strong>{{ currentStep > 1 ? 's2' : 's1' }}</strong>
           </div>
         </div>
       </div>
