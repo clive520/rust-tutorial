@@ -4,6 +4,9 @@ export default defineConfig({
   title: "Rust 程式設計入門到實戰",
   description: "專為學生與初學者打造的 Rust 互動式教學網站",
   base: '/rust-tutorial/',
+  markdown: {
+    vPre: true
+  },
   themeConfig: {
     nav: [
       { text: '首頁', link: '/' },
