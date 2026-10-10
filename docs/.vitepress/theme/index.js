@@ -3,6 +3,7 @@ import RustRunner from '../../components/RustRunner.vue'
 import OwnershipVisualizer from '../../components/OwnershipVisualizer.vue'
 import TechDecisionCard from '../../components/TechDecisionCard.vue'
 import GuessingTerminal from '../../components/GuessingTerminal.vue'
+import TrafficSimulator from '../../components/TrafficSimulator.vue'
 
 export default {
   extends: DefaultTheme,
@@ -11,5 +12,6 @@ export default {
     app.component('OwnershipVisualizer', OwnershipVisualizer)
     app.component('TechDecisionCard', TechDecisionCard)
     app.component('GuessingTerminal', GuessingTerminal)
+    app.component('TrafficSimulator', TrafficSimulator)
   }
 }
