@@ -7,6 +7,7 @@ import TrafficSimulator from '../../components/TrafficSimulator.vue'
 import BorrowVisualizer from '../../components/BorrowVisualizer.vue'
 import DataModelLab from '../../components/DataModelLab.vue'
 import TraitPowerLab from '../../components/TraitPowerLab.vue'
+import MiniGrepSimulator from '../../components/MiniGrepSimulator.vue'
 
 export default {
   extends: DefaultTheme,
@@ -19,5 +20,6 @@ export default {
     app.component('BorrowVisualizer', BorrowVisualizer)
     app.component('DataModelLab', DataModelLab)
     app.component('TraitPowerLab', TraitPowerLab)
+    app.component('MiniGrepSimulator', MiniGrepSimulator)
   }
 }
