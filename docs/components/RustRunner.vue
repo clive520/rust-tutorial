@@ -197,6 +197,171 @@ const snippets = {
 });\n        handles.push(handle);
 }\n\n    // 等待所有執行緒執行完畢\n    for handle in handles {\n        handle.join().unwrap();
 }\n\n    println!("🎉 最終計數器結果: {}", *counter.lock().unwrap());
+}`,
+  web_http_response: `// 範例一：TCP 請求解析與 HTTP 封包組裝
+fn build_http_response(status_code: &str, body_html: &str) -> String {
+    let length = body_html.len();
+    format!(
+        "HTTP/1.1 {}\r\nContent-Length: {}\r\nContent-Type: text/html; charset=utf-8\r\n\r\n{}",
+        status_code, length, body_html
+    )
+}
+
+fn main() {
+    let mock_request = "GET / HTTP/1.1\r\nHost: 127.0.0.1:7878\r\nUser-Agent: RustClient\r\n\r\n";
+    println!("📥 伺服器接收到原始 HTTP 請求：\n{}", mock_request);
+
+    let html_content = "<!DOCTYPE html><html><body><h1>🦀 歡迎光臨 Rust 手刻 Web 伺服器！</h1><p>全非阻塞、極致輕量、記憶體安全！</p></body></html>";
+    let response = build_http_response("200 OK", html_content);
+
+    println!("📤 伺服器生成標準 HTTP 回應封包：\n{}", response);
+}`,
+  web_routing_match: `// 範例二：HTTP 路由分發與 404 狀態碼處理
+struct HttpResponse {
+    status_line: &'static str,
+    body: String,
+}
+
+fn handle_route(request_path: &str) -> HttpResponse {
+    match request_path {
+        "/" => HttpResponse {
+            status_line: "HTTP/1.1 200 OK",
+            body: "<h1>🏠 歡迎來到首頁</h1>".to_string(),
+        },
+        "/status" => HttpResponse {
+            status_line: "HTTP/1.1 200 OK",
+            body: "{\"status\": \"healthy\", \"uptime_sec\": 3600, \"active_workers\": 4}".to_string(),
+        },
+        "/sleep" => HttpResponse {
+            status_line: "HTTP/1.1 200 OK",
+            body: "<h1>💤 耗時運算已完成！</h1>".to_string(),
+        },
+        _ => HttpResponse {
+            status_line: "HTTP/1.1 404 NOT FOUND",
+            body: "<h1>❌ 404 查無此頁面</h1>".to_string(),
+        },
+    }
+}
+
+fn main() {
+    let test_paths = vec!["/", "/status", "/sleep", "/admin/secret"];
+
+    for path in test_paths {
+        let resp = handle_route(path);
+        println!("請求 [GET {}] ➔ 狀態: {} | 內容長度: {} 位元組", path, resp.status_line, resp.body.len());
+    }
+}`,
+  web_threadpool_mini: `// 範例三：手刻迷你執行緒池 (ThreadPool & Worker)
+use std::sync::{mpsc, Arc, Mutex};
+use std::thread;
+
+type Job = Box<dyn FnOnce() + Send + 'static>;
+
+struct Worker {
+    id: usize,
+    thread: thread::JoinHandle<()>,
+}
+
+impl Worker {
+    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
+        let thread = thread::spawn(move || loop {
+            let message = receiver.lock().unwrap().recv();
+            match message {
+                Ok(job) => {
+                    println!("  [Worker #{}] 領取任務並開始執行...", id);
+                    job();
+                    println!("  [Worker #{}] 任務執行完畢！", id);
+                }
+                Err(_) => {
+                    println!("  [Worker #{}] 通道已關閉，退出工作迴圈。", id);
+                    break;
+                }
+            }
+        });
+
+        Worker { id, thread }
+    }
+}
+
+fn main() {
+    let (sender, receiver) = mpsc::channel();
+    let receiver = Arc::new(Mutex::new(receiver));
+
+    let mut workers = Vec::new();
+    for id in 1..=4 {
+        workers.push(Worker::new(id, Arc::clone(&receiver)));
+    }
+
+    println!("🚀 派發 4 個網頁請求任務給執行緒池：");
+    for i in 1..=4 {
+        sender.send(Box::new(move || {
+            println!("    ➔ 正在處理請求 #{}: 計算資料庫報表...", i);
+        })).unwrap();
+    }
+
+    drop(sender); // 關閉發送端，通知 workers 退出
+    for worker in workers {
+        worker.thread.join().unwrap();
+    }
+    println!("🏁 所有 Worker 均已安全結束！");
+}`,
+  web_graceful_shutdown: `// 範例四：Drop 特徵與優雅停機 (Graceful Shutdown)
+use std::sync::{mpsc, Arc, Mutex};
+use std::thread;
+
+struct SimpleThreadPool {
+    sender: Option<mpsc::Sender<String>>,
+    workers: Vec<thread::JoinHandle<()>>,
+}
+
+impl SimpleThreadPool {
+    fn new(size: usize) -> Self {
+        let (tx, rx) = mpsc::channel::<String>();
+        let rx = Arc::new(Mutex::new(rx));
+        let mut workers = Vec::new();
+
+        for id in 1..=size {
+            let rx = Arc::clone(&rx);
+            let handle = thread::spawn(move || {
+                while let Ok(msg) = rx.lock().unwrap().recv() {
+                    println!("  Worker #{} 處理完畢任務: {}", id, msg);
+                }
+                println!("  Worker #{} 收到關閉信號，安全下班！", id);
+            });
+            workers.push(handle);
+        }
+
+        Self { sender: Some(tx), workers }
+    }
+
+    fn execute(&self, task_name: &str) {
+        if let Some(ref sender) = self.sender {
+            sender.send(task_name.to_string()).unwrap();
+        }
+    }
+}
+
+// 實作 Drop 特徵：伺服器關閉時優雅停機
+impl Drop for SimpleThreadPool {
+    fn drop(&mut self) {
+        println!("🛑 觸發 Drop：開始優雅停機流程...");
+        drop(self.sender.take()); // 丟棄發送端，關閉通道
+
+        for (i, worker) in self.workers.drain(..).enumerate() {
+            println!("  正在等待 Worker #{} join 結束...", i + 1);
+            worker.join().unwrap();
+        }
+        println!("🎉 伺服器已安全停止，沒有遺漏任何客人！");
+    }
+}
+
+fn main() {
+    {
+        let pool = SimpleThreadPool::new(3);
+        pool.execute("首頁 GET /");
+        pool.execute("API 查詢 GET /status");
+        println!("所有任務已派發完畢，準備離開 main 作用域...\n");
+    } // pool 在此離開作用域，自動觸發 Drop！
 }`
 }
 
