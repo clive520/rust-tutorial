@@ -36,15 +36,28 @@ const props = defineProps({
   initialCode: {
     type: String,
     default: ''
+  },
+  snippetKey: {
+    type: String,
+    default: 'default'
   }
 })
 
+const snippets = {
+  default: `fn main() {\n    println!("Hello, Rust World! 🦀");\n}`,
+  temp_converter: `fn main() {\n    // 溫度轉換器：攝氏轉華氏\n    let celsius = 25.0;\n    let fahrenheit = (celsius * 9.0 / 5.0) + 32.0;\n\n    println!("🌡️ 攝氏 {:.1}°C 等於 華氏 {:.1}°F", celsius, fahrenheit);\n}`,
+  bmi_calculator: `fn main() {\n    // BMI 健康計算機\n    let weight_kg = 65.0;\n    let height_m = 1.75;\n    let bmi = weight_kg / (height_m * height_m);\n\n    println!("體重: {} kg, 身高: {} m", weight_kg, height_m);\n    println!("您的 BMI 指數為: {:.2}", bmi);\n\n    if bmi < 18.5 {\n        println!("👉 體重過輕，多吃點有營養的食物！");\n    } else if bmi < 24.0 {\n        println!("👉 標準體態，保持得非常好！🎉");\n    } else {\n        println!("👉 體重過重，記得多運動喔！");\n    }\n}`,
+  traffic_light: `fn main() {\n    // 交通紅綠燈計時器\n    let light = "綠燈";\n    let count = 5;\n\n    println!("🚦 目前號誌是: {}", light);\n    for i in (1..=count).rev() {\n        println!("倒數通行時間: {} 秒...", i);\n    }\n    println!("⚠️ 轉為黃燈，請減速停等！");\n}`
+}
+
 const slotContainer = ref(null)
-const code = ref(props.initialCode || 'fn main() {\n    println!("Hello, Rust World!");\n}')
+const code = ref(props.initialCode || snippets[props.snippetKey] || snippets.default)
 
 onMounted(() => {
   if (slotContainer.value && slotContainer.value.innerText.trim()) {
     code.value = slotContainer.value.innerText.trim()
+  } else if (snippets[props.snippetKey]) {
+    code.value = snippets[props.snippetKey]
   }
 })
 const output = ref('')
