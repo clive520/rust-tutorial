@@ -4,6 +4,7 @@ import OwnershipVisualizer from '../../components/OwnershipVisualizer.vue'
 import TechDecisionCard from '../../components/TechDecisionCard.vue'
 import GuessingTerminal from '../../components/GuessingTerminal.vue'
 import TrafficSimulator from '../../components/TrafficSimulator.vue'
+import BorrowVisualizer from '../../components/BorrowVisualizer.vue'
 
 export default {
   extends: DefaultTheme,
@@ -13,5 +14,6 @@ export default {
     app.component('TechDecisionCard', TechDecisionCard)
     app.component('GuessingTerminal', GuessingTerminal)
     app.component('TrafficSimulator', TrafficSimulator)
+    app.component('BorrowVisualizer', BorrowVisualizer)
   }
 }
