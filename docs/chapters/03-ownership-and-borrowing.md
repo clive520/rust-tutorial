@@ -32,42 +32,29 @@
 let s1 = String::from("hello");
 let s2 = s1; // 所有權轉移給 s2，s1 失效！
 
-// println!("{}", s1); // ❌ 編譯錯誤：borrow of moved value: `s1`
+// println!("{}", s1); // 編譯錯誤：borrow of moved value
 ```
 
 ---
 
-## 4. 🧠 記憶體與所有權視覺化模擬
+## 4. 所有權轉移與借用範例
 
-點擊下方步驟按鈕，觀察 `s1` 與 `s2` 在 Stack 和 Heap 記憶體中的流轉過程：
-
-<OwnershipVisualizer></OwnershipVisualizer>
-
----
-
-## 5. 參照與借用 (References & Borrowing)
-
-如果我們不想交出所有權，但想讓其他函式「看一眼」或「讀取」資料呢？
-答案就是使用 **參照（`&`）**，這個動作稱為 **借用（Borrowing）**。
-
-### 借用的兩大鐵律：
-1. 在任何特定時間點，你只能擁有**一個可變參照（`&mut`）**，或者**多個不可變參照（`&`）**。
-2. 參照必須永遠有效（不可指向已釋放的記憶體）。
+我們來觀察參照（Reference）的使用：
 
 ```rust
 fn main() {
     let mut s = String::from("hello");
-    
+
     // 不可變借用
-    let len = calculate_length(&s);
-    println!("長度是: {}", len);
+    let len = calculate_len(&s);
+    println!("長度: {}", len);
 
     // 可變借用
     append_world(&mut s);
     println!("修改後: {}", s);
 }
 
-fn calculate_length(s: &String) -> usize {
+fn calculate_len(s: &String) -> usize {
     s.len()
 }
 
@@ -76,19 +63,8 @@ fn append_world(s: &mut String) {
 }
 ```
 
-<RustRunner>
-```rust
-fn main() {
-    let mut greeting = String::from("Rust");
-    
-    // 借用 greeting 並傳入函式
-    add_exclamation(&mut greeting);
-    
-    println!("結果: {}", greeting);
-}
+---
 
-fn add_exclamation(text: &mut String) {
-    text.push_str(" is Awesome! 🦀");
-}
-```
-</RustRunner>
+## 5. 互動體驗：在線執行
+
+<RustRunner></RustRunner>
