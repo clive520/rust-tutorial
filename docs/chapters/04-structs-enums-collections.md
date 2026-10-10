@@ -55,9 +55,9 @@ Rust 沒有像其他語言的 `null` 或 `nil`，而是使用 `Option<T>` 來明
 
 ## 3. 常見集合 (Collections)
 
-- **動態陣列 `Vec<T>`**：在 Heap 上動態分配、連續儲存同型別的資料。
-- **字串 `String`**：UTF-8 編碼的位元組集合。
-- **雜湊映射 `HashMap<K, V>`**：鍵值對（Key-Value）儲存結構。
+- **動態陣列** `Vec<T>`：在 Heap 上動態分配、連續儲存同型別的資料。
+- **字串** `String`：UTF-8 編碼的位元組集合。
+- **雜湊映射** `HashMap<K, V>`：鍵值對（Key-Value）儲存結構。
 
 ---
 
