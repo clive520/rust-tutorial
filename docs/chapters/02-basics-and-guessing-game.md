@@ -58,10 +58,13 @@ fn main() {
 
     println!("你猜的數字是: {}", guess);
 
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("太小了！"),
-        Ordering::Greater => println!("太大了！"),
-        Ordering::Equal => println!("🎉 恭喜你猜中了！"),
+    // 進行比對
+    if guess < secret_number {
+        println!("太小了！");
+    } else if guess > secret_number {
+        println!("太大了！");
+    } else {
+        println!("🎉 恭喜你猜中了！");
     }
 }
 ```
@@ -74,8 +77,6 @@ fn main() {
 
 <RustRunner>
 ```rust
-use std::cmp::Ordering;
-
 fn main() {
     let secret = 50;
     let guess = 42; // 試著修改這個數值
@@ -83,10 +84,12 @@ fn main() {
     println!("祕密數字: {}", secret);
     println!("玩家猜測: {}", guess);
 
-    match guess.cmp(&secret) {
-        Ordering::Less => println!("👉 太小了！"),
-        Ordering::Greater => println!("👉 太大了！"),
-        Ordering::Equal => println!("🎉 恭喜！精準猜中！"),
+    if guess < secret {
+        println!("👉 太小了！");
+    } else if guess > secret {
+        println!("👉 太大了！");
+    } else {
+        println!("🎉 恭喜！精準猜中！");
     }
 }
 ```
